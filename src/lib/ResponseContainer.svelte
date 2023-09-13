@@ -1,21 +1,29 @@
 <script lang="ts">
+	import UserInput from './Responses/UserInput.svelte';
+	import Text from './Responses/Text.svelte';
+	import handleImage from './Handlers/ImageHandler';
+	import handleText from './Handlers/TextHandler';
+
+	let container: HTMLElement;
+
+	export function addResponse(inputtedText: string) {
+		let userInput = new UserInput({ target: container, props: { text: inputtedText } });
+
+		switch (inputtedText) {
+			case 'image':
+				handleImage(container);
+				break;
+			default:
+				handleText(container, inputtedText);
+				break;
+		}
+
+		//scroll to bottom of the page
+		window.scrollTo(0, document.body.scrollHeight);
+	}
 </script>
 
-<main>
-	<div>A</div>
-	<div>B</div>
-	<div>C</div>
-	<div>D</div>
-	<div>E</div>
-	<div>F</div>
-	<div>G</div>
-	<div>H</div>
-	<div>I</div>
-	<div>J</div>
-	<div>K</div>
-	<div>L</div>
-	<div>M</div>
-</main>
+<main bind:this={container} />
 
 <style>
 	main {
@@ -27,14 +35,5 @@
 		padding: 1rem 20%;
 		overflow: scroll;
 		overscroll-behavior: contain;
-	}
-
-	div {
-		width: 100%;
-		border-radius: 0.5rem;
-		padding: 0.5rem;
-		background-color: var(--background-light);
-		min-height: 8rem;
-		color: white;
 	}
 </style>

@@ -3,7 +3,7 @@
 </script>
 
 <main>
-	<h3>Fathom said:</h3>
+	<h3>User said:</h3>
 	<p>{text}</p>
 </main>
 
@@ -12,10 +12,11 @@
 		width: 100%;
 		border-radius: 0.5rem;
 		padding: 0.5rem;
-		background-color: var(--background-light);
-		min-height: 5rem;
+		background-color: var(--mid);
+		min-height: 3rem;
 		color: white;
 		display: grid;
-		place-items: center start;
+		place-items: center end;
+		gap: 0.5rem;
 	}
 </style>

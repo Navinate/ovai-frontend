@@ -1,11 +1,18 @@
-<script>
+<script lang="ts">
 	import Prompt from '$lib/Prompt.svelte';
 	import ResponseContainer from '$lib/ResponseContainer.svelte';
+
+	let container: ResponseContainer;
+
+	function handleResponse(e: any) {
+		console.log('response received', e.detail);
+		container.addResponse(e.detail);
+	}
 </script>
 
 <main>
-	<ResponseContainer />
-	<Prompt />
+	<ResponseContainer bind:this={container} />
+	<Prompt on:submit={handleResponse} />
 </main>
 
 <style>

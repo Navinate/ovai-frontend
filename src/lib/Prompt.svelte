@@ -5,17 +5,39 @@
 
 	let value = '';
 	let placeholder = 'Type your prompt here';
+	let heightModifier = 3.2;
+	let textarea: HTMLTextAreaElement;
 
 	function submitPrompt() {
-		dispatch('submit', value);
-		console.log('submitting prompt', value);
+		if (value !== '') {
+			dispatch('submit', value);
+		}
+	}
+
+	function detectEnterPress(e: KeyboardEvent) {
+		if (e.key === 'Enter' && !e.shiftKey) {
+			e.preventDefault();
+			submitPrompt();
+			textarea.value = '';
+			heightModifier = 3.2;
+			textarea.focus();
+		} else if (e.key === 'Enter' && e.shiftKey) {
+			heightModifier += 1;
+		}
 	}
 </script>
 
 <main>
 	<div>
 		<!-- svelte-ignore a11y-autofocus -->
-		<textarea autofocus bind:value {placeholder} />
+		<textarea
+			bind:this={textarea}
+			bind:value
+			autofocus
+			{placeholder}
+			on:keypress={detectEnterPress}
+			style="--heightModifier: {heightModifier}"
+		/>
 		<button on:click={submitPrompt}>
 			<img src="/submit.svg" alt="submission arrow" />
 		</button>
@@ -54,7 +76,7 @@
 	}
 	textarea {
 		width: 100%;
-		height: fit-content;
+		height: calc(var(--heightModifier) * 1rem);
 		padding-top: 1rem;
 		font-size: 1rem;
 		background-color: transparent;
@@ -74,6 +96,12 @@
 		height: 2.5rem;
 		border: none;
 		place-self: center end;
+	}
+	button:hover {
+		background-color: rgba(255, 255, 255, 0.8);
+	}
+	button:active {
+		background-color: rgba(0, 0, 0, 0.5);
 	}
 
 	img {
