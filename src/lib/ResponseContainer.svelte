@@ -1,8 +1,9 @@
 <script lang="ts">
-	import UserInput from './Responses/UserInput.svelte';
-	import Text from './Responses/Text.svelte';
-	import handleImage from './Handlers/ImageHandler';
-	import handleText from './Handlers/TextHandler';
+	import UserInput from '$lib/Responses/UserInput.svelte';
+	import handleImage from '$lib/Handlers/ImageHandler';
+	import handleText from '$lib/Handlers/TextHandler';
+	import handleHeatMap from '$lib/Handlers/HeatMapHandler';
+	import handleTaxonomy from '$lib/Handlers/TaxonomyHandler';
 
 	let container: HTMLElement;
 
@@ -13,11 +14,16 @@
 			case 'image':
 				handleImage(container);
 				break;
+			case 'heatmap':
+				handleHeatMap(container);
+				break;
+			case 'taxonomy':
+				handleTaxonomy(container, 'jellyfish');
+				break;
 			default:
 				handleText(container, inputtedText);
 				break;
 		}
-
 		//scroll to bottom of the page
 		window.scrollTo(0, document.body.scrollHeight);
 	}
