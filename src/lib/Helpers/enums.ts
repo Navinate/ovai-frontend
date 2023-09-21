@@ -7,11 +7,3 @@ export enum taxonomyLevel {
 	genus,
 	species
 }
-
-export enum outputType {
-	text,
-	image,
-	histogram,
-	heatmap,
-	taxonomy
-}

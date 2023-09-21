@@ -1,7 +1,7 @@
 import { outputType } from '$lib/Helpers/enums';
 
 export interface apiResponse {
-	outputType: outputType;
+	outputType: string;
 	textResponse: string;
 	species: speciesData[];
 	table: any[];

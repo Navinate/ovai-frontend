@@ -36,6 +36,12 @@
 		grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
 		grid-template-rows: repeat(auto-fill, minmax(10rem, 1fr));
 		width: 100%;
+		gap: 0.5rem;
 		height: fit-content;
+	}
+
+	img {
+		width: 100%;
+		height: 100%;
 	}
 </style>

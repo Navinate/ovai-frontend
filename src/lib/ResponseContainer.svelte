@@ -4,7 +4,6 @@
 	import handleText from '$lib/Handlers/TextHandler';
 	import handleHeatMap from '$lib/Handlers/HeatMapHandler';
 	import handleTaxonomy from '$lib/Handlers/TaxonomyHandler';
-	import { outputType } from './Helpers/enums';
 	import type { apiResponse } from './types/responseType';
 
 	let container: HTMLElement;
@@ -42,7 +41,7 @@
 		} */
 
 		let dummyData: apiResponse = {
-			outputType: outputType.image,
+			outputType: inputtedText,
 			textResponse: 'This is a test response',
 			species: [],
 			table: []
@@ -61,6 +60,8 @@
 			case 'image':
 				handleImage(container, jsonResponse);
 				break;
+			case 'histogram':
+				console.log('histogram request');
 			case 'heatmap':
 				handleHeatMap(container, jsonResponse);
 				break;
