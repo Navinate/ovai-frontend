@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { min } from 'd3';
 	import simpleheat from 'simpleheat';
 	import { onMount } from 'svelte';
+
 	export let mapBoxKey =
 		'pk.eyJ1IjoidGNsdWZmIiwiYSI6ImNsbWpoNGJ3MTAzYm8ycXJ4ZDVieTk3ODYifQ.__pspVfdjrgiM_ACd5jhdg';
 	export let lat: number = 36.7842;

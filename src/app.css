@@ -1,17 +1,19 @@
 :root {
-    --background-dark: #363946;
-    --accent-dark: #000000;
-    --mid: #696773;
-    --background-light: #819595;
-    --accent-light: #C1DBE3;
+	--background-dark: #363946;
+	--accent-dark: #000000;
+	--mid: #696773;
+	--background-light: #819595;
+	--accent-light: #c1dbe3;
 }
 
 * {
-    margin: 0px;
-    padding: 0px;
-    box-sizing: border-box;
-    overscroll-behavior: none;
-    font-family: 'Roboto', sans-serif;
+	margin: 0px;
+	padding: 0px;
+	box-sizing: border-box;
+	overscroll-behavior: none;
+	font-family: 'Roboto', sans-serif;
 }
 
-body {background-color: var(--background-dark);}
+body {
+	background-color: var(--background-dark);
+}

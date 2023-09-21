@@ -2,16 +2,18 @@
 	import Prompt from '$lib/Prompt.svelte';
 	import ResponseContainer from '$lib/ResponseContainer.svelte';
 
+	const URL = 'http://localhost:5000/';
+
 	let container: ResponseContainer;
 
-	function handleResponse(e: any) {
-		console.log('response received', e.detail);
-		container.addResponse(e.detail);
+	function handleResponse(event: any) {
+		console.log('response received', event.detail);
+		container.fetchResponse(event.detail);
 	}
 </script>
 
 <main>
-	<ResponseContainer bind:this={container} />
+	<ResponseContainer {URL} bind:this={container} />
 	<Prompt on:submit={handleResponse} />
 </main>
 

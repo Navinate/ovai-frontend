@@ -1,11 +1,23 @@
 <script lang="ts">
-	export let src: string;
+	import type { speciesData } from '$lib/types/responseType';
+
+	export let speciesData: speciesData[];
+	export let naturalTextResponse: string;
 </script>
 
 <main>
 	<h3>Fathom said:</h3>
-	<!-- svelte-ignore a11y-img-redundant-alt -->
-	<img {src} alt="random photo taken from picsum.photos" />
+	<blockquote>{naturalTextResponse}</blockquote>
+	<div>
+		{#each speciesData as entry}
+			<div>
+				<img src={entry.url} alt={entry.name} />
+				<h4>Name: {entry.name}</h4>
+				<p>Depth: {entry.depth_meters}</p>
+				<p>Timestamp: {entry.created_timestamp}</p>
+			</div>
+		{/each}
+	</div>
 </main>
 
 <style>
@@ -18,5 +30,12 @@
 		color: white;
 		display: grid;
 		place-items: center start;
+	}
+	div {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+		grid-template-rows: repeat(auto-fill, minmax(10rem, 1fr));
+		width: 100%;
+		height: fit-content;
 	}
 </style>

@@ -4,25 +4,73 @@
 	import handleText from '$lib/Handlers/TextHandler';
 	import handleHeatMap from '$lib/Handlers/HeatMapHandler';
 	import handleTaxonomy from '$lib/Handlers/TaxonomyHandler';
+	import { outputType } from './Helpers/enums';
+	import type { apiResponse } from './types/responseType';
 
 	let container: HTMLElement;
+	export let URL: string;
+	export let guid: string | null = null;
 
-	export function addResponse(inputtedText: string) {
-		let userInput = new UserInput({ target: container, props: { text: inputtedText } });
+	export async function fetchResponse(inputtedText: string) {
+		//make query to backend
 
-		function detectInputCategory(category: string): boolean {
-			return inputtedText.toLowerCase().includes(category);
+		/* let params = new URLSearchParams();
+		params.append('question', inputtedText);
+		if (guid !== null) {
+			params.append('guid', guid);
 		}
-		if (detectInputCategory('image')) {
-			handleImage(container);
-		} else if (detectInputCategory('heatmap')) {
-			handleHeatMap(container);
-		} else if (detectInputCategory('taxonomy')) {
-			handleTaxonomy(container, inputtedText);
-		} else {
-			handleText(container, inputtedText);
-		}
+		try {
+			let res = await fetch(URL, {
+				method: guid !== null ? 'PUT' : 'POST',
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded'
+				},
+				body: params
+			});
 
+			if (res.ok) {
+				const jsonResponse = await res.json();
+				guid = jsonResponse.guid;
+				handleResponse(jsonResponse, inputtedText);
+			} else {
+				console.error('Error:', res.statusText);
+				alert(res.statusText);
+			}
+			//@ts-ignore
+		} catch (error) {
+			console.error('Fetch Error:', error);
+		} */
+
+		let dummyData: apiResponse = {
+			outputType: outputType.image,
+			textResponse: 'This is a test response',
+			species: [],
+			table: []
+		};
+		handleResponse(dummyData, 'test');
+	}
+
+	function handleResponse(jsonResponse: any, inputtedText: string) {
+		//repeat user input into a user input text box component
+		const userInput = new UserInput({ target: container, props: { text: inputtedText } });
+
+		switch (jsonResponse.outputType) {
+			case 'text':
+				handleText(container, jsonResponse.textResponse);
+				break;
+			case 'image':
+				handleImage(container, jsonResponse);
+				break;
+			case 'heatmap':
+				handleHeatMap(container, jsonResponse);
+				break;
+			case 'taxonomy':
+				handleTaxonomy(container, jsonResponse);
+				break;
+			default:
+				console.error('Error: Invalid output type');
+				break;
+		}
 		//scroll to bottom of the page
 		window.scrollTo(0, document.body.scrollHeight);
 	}
