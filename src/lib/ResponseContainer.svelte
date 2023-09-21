@@ -10,20 +10,19 @@
 	export function addResponse(inputtedText: string) {
 		let userInput = new UserInput({ target: container, props: { text: inputtedText } });
 
-		switch (inputtedText) {
-			case 'image':
-				handleImage(container);
-				break;
-			case 'heatmap':
-				handleHeatMap(container);
-				break;
-			case 'taxonomy':
-				handleTaxonomy(container, 'jellyfish');
-				break;
-			default:
-				handleText(container, inputtedText);
-				break;
+		function detectInputCategory(category: string): boolean {
+			return inputtedText.toLowerCase().includes(category);
 		}
+		if (detectInputCategory('image')) {
+			handleImage(container);
+		} else if (detectInputCategory('heatmap')) {
+			handleHeatMap(container);
+		} else if (detectInputCategory('taxonomy')) {
+			handleTaxonomy(container, inputtedText);
+		} else {
+			handleText(container, inputtedText);
+		}
+
 		//scroll to bottom of the page
 		window.scrollTo(0, document.body.scrollHeight);
 	}
