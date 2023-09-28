@@ -40,6 +40,7 @@
 		heat.data(points).max(max).draw();
 
 		heatMapCanvas.style.backgroundImage = `url(${imageURL})`;
+		window.scrollTo(0, document.body.scrollHeight);
 	});
 </script>
 

@@ -48,6 +48,7 @@ function createLineChart(data: { x: number; y: number }[]) {
 // Call the function to create the chart
 onMount(() => {
   createLineChart(data);
+  window.scrollTo(0, document.body.scrollHeight);
 });
 </script>
 
@@ -58,13 +59,13 @@ onMount(() => {
 
 <style>
     main {
-		width: 100%;
-		border-radius: 0.5rem;
-		padding: 0.5rem;
-		background-color: var(--background-light);
-		min-height: 5rem;
-		color: white;
-		display: grid;
-		place-items: center start;
-	}
+      width: 100%;
+      border-radius: 0.5rem;
+      padding: 0.5rem;
+      background-color: var(--background-light);
+      min-height: 5rem;
+      color: white;
+      display: grid;
+      place-items: center start;
+    }
 </style>

@@ -5,6 +5,7 @@
 	import handleHeatMap from '$lib/Handlers/HeatMapHandler';
 	import handleTaxonomy from '$lib/Handlers/TaxonomyHandler';
 	import handleChart from '$lib/Handlers/ChartHandler';
+	import handleVega from '$lib/Handlers/VegaHandler';
 	import type { apiResponse } from './types/responseType';
 
 	let container: HTMLElement;
@@ -71,6 +72,9 @@
 				break;
 			case 'chart':
 				handleChart(container);
+				break;
+			case 'vega':
+				handleVega(container);
 				break;
 			default:
 				console.error('Error: Invalid output type');
