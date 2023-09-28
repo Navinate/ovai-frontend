@@ -30,6 +30,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"chart.js": "^4.4.0",
 		"simpleheat": "^0.4.0"
 	}
 }

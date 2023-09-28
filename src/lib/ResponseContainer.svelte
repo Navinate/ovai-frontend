@@ -4,6 +4,7 @@
 	import handleText from '$lib/Handlers/TextHandler';
 	import handleHeatMap from '$lib/Handlers/HeatMapHandler';
 	import handleTaxonomy from '$lib/Handlers/TaxonomyHandler';
+	import handleChart from '$lib/Handlers/ChartHandler';
 	import type { apiResponse } from './types/responseType';
 
 	let container: HTMLElement;
@@ -46,7 +47,7 @@
 			species: [],
 			table: []
 		};
-		handleResponse(dummyData, 'test');
+		handleResponse(dummyData, inputtedText);
 	}
 
 	function handleResponse(jsonResponse: any, inputtedText: string) {
@@ -68,8 +69,12 @@
 			case 'taxonomy':
 				handleTaxonomy(container, jsonResponse);
 				break;
+			case 'chart':
+				handleChart(container);
+				break;
 			default:
 				console.error('Error: Invalid output type');
+				handleText(container, 'Error: Invalid output type');
 				break;
 		}
 		//scroll to bottom of the page
@@ -86,8 +91,9 @@
 		flex-flow: column;
 		justify-content: flex-end;
 		gap: 1rem;
-		padding: 1rem 20%;
-		overflow: scroll;
+		margin: 1rem auto;
+		max-width: 900px;
+		overflow: hidden;
 		overscroll-behavior: contain;
 	}
 </style>

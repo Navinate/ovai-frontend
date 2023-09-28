@@ -19,7 +19,7 @@
 
 <style>
 	main {
-		width: 100dvw;
+		width: 99vw;
 		height: 100dvh;
 		overscroll-behavior: none;
 	}
