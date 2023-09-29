@@ -3,7 +3,7 @@ import { outputType } from '$lib/Helpers/enums';
 export interface apiResponse {
 	outputType: string;
 	responseText: string;
-	species?: speciesData[];
+	species: speciesData[];
 	table?: any[];
 }
 
