@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
+	import {Shadow} from 'svelte-loading-spinners';
 
 	const dispatch = createEventDispatcher();
 
@@ -7,6 +8,12 @@
 	let placeholder = 'Type your prompt here';
 	let heightModifier = 3.2;
 	let textarea: HTMLTextAreaElement;
+	let loading = false;
+
+	export function toggleLoading() {
+		loading = !loading
+		console.log('toggling loading to ', loading);
+	}
 
 	function submitPrompt() {
 		if (value !== '') {
@@ -28,6 +35,9 @@
 </script>
 
 <main>
+	{#if loading}
+	<Shadow size="30" color="#FFFFFF" unit="px" duration="1s" />
+	{/if}
 	<div>
 		<!-- svelte-ignore a11y-autofocus -->
 		<textarea
@@ -58,6 +68,7 @@
 		bottom: 0;
 		left: 0;
 		display: grid;
+		place-items: center;
 		min-height: 12rem;
 		overscroll-behavior: none;
 	}

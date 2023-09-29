@@ -12,9 +12,8 @@
 		{#each speciesData as entry}
 			<div>
 				<img src={entry.url} alt={entry.name} />
-				<h4>Name: {entry.name}</h4>
+				<h4>Name: {entry.concept}</h4>
 				<p>Depth: {entry.depth_meters}</p>
-				<p>Timestamp: {entry.created_timestamp}</p>
 			</div>
 		{/each}
 	</div>

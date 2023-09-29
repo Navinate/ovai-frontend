@@ -7,20 +7,34 @@
 	import handleChart from '$lib/Handlers/ChartHandler';
 	import handleVega from '$lib/Handlers/VegaHandler';
 	import type { apiResponse } from './types/responseType';
+	import { createEventDispatcher } from 'svelte';
+	const dispatch = createEventDispatcher();
 
 	let container: HTMLElement;
 	export let URL: string;
 	export let guid: string | null = null;
 
 	export async function fetchResponse(inputtedText: string) {
-		//make query to backend
+		if (inputtedText === 'test') {
+			let dummyData: apiResponse = {
+				outputType: "text",
+				textResponse: 'This is a test response',
+				species: [],
+				table: []
+			};
+			handleResponse(dummyData, inputtedText);
+		}
 
-		/* let params = new URLSearchParams();
+		// create paramter object for input
+		let params = new URLSearchParams();
+
 		params.append('question', inputtedText);
+
 		if (guid !== null) {
 			params.append('guid', guid);
 		}
 		try {
+			console.log("sending request");
 			let res = await fetch(URL, {
 				method: guid !== null ? 'PUT' : 'POST',
 				headers: {
@@ -30,31 +44,25 @@
 			});
 
 			if (res.ok) {
+				console.log("response received");
 				const jsonResponse = await res.json();
 				guid = jsonResponse.guid;
-				handleResponse(jsonResponse, inputtedText);
+				console.log(jsonResponse);
+				handleResponse(jsonResponse.response, inputtedText);
 			} else {
-				console.error('Error:', res.statusText);
+				console.error('[TREY] Error:', res.statusText);
 				alert(res.statusText);
 			}
 			//@ts-ignore
 		} catch (error) {
-			console.error('Fetch Error:', error);
-		} */
-
-		let dummyData: apiResponse = {
-			outputType: inputtedText,
-			textResponse: 'This is a test response',
-			species: [],
-			table: []
-		};
-		handleResponse(dummyData, inputtedText);
+			console.error('[TREY] Fetch Error:', error);
+		}
 	}
 
 	function handleResponse(jsonResponse: any, inputtedText: string) {
 		//repeat user input into a user input text box component
 		const userInput = new UserInput({ target: container, props: { text: inputtedText } });
-
+		console.log("Output type: ",jsonResponse.outputType);
 		switch (jsonResponse.outputType) {
 			case 'text':
 				handleText(container, jsonResponse.textResponse);
@@ -83,6 +91,7 @@
 		}
 		//scroll to bottom of the page
 		window.scrollTo(0, document.body.scrollHeight);
+		dispatch( 'responseReceived');
 	}
 </script>
 

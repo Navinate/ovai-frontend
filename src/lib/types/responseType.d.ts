@@ -2,13 +2,14 @@ import { outputType } from '$lib/Helpers/enums';
 
 export interface apiResponse {
 	outputType: string;
-	textResponse: string;
-	species: speciesData[];
-	table: any[];
+	responseText: string;
+	species?: speciesData[];
+	table?: any[];
 }
 
 export interface speciesData {
 	id: number;
+	concept: string;
 	name: string; //species name
 	url: string;
 	taxonomy?: string[];
