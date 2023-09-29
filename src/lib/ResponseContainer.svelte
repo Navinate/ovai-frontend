@@ -18,7 +18,7 @@
 		if (inputtedText === 'test') {
 			let dummyData: apiResponse = {
 				outputType: "text",
-				textResponse: 'This is a test response',
+				responseText: 'This is a test response',
 				species: [],
 				table: []
 			};
