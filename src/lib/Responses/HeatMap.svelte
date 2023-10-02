@@ -1,11 +1,16 @@
 <script lang="ts">
+	import type { speciesData } from '$lib/types/responseType';
 	import simpleheat from 'simpleheat';
 	import { onMount } from 'svelte';
 
 	export let mapBoxKey =
 		'pk.eyJ1IjoidGNsdWZmIiwiYSI6ImNsbWpoNGJ3MTAzYm8ycXJ4ZDVieTk3ODYifQ.__pspVfdjrgiM_ACd5jhdg';
+	
+	export let responseText: string;
+	// export let speciesData: speciesData[];
 	export let lat: number = 36.7842;
 	export let long: number = -122.1669;
+	export let positionData: number[];
 	export let mapWidth: number = 400;
 	export let mapHeight: number = 400;
 	export let mapZoom: number = 8;
@@ -17,27 +22,10 @@
 	let heatMapCanvas: HTMLCanvasElement;
 	// minimal heatmap instance configuration
 	onMount(() => {
-		// now generate some random data
-		let points = [];
-		let max = 0;
-		let min = 0;
-		let len = 200;
-
-		while (len--) {
-			let val = Math.floor(Math.random() * 100);
-			max = Math.max(max, val);
-			let point = [
-				Math.floor(Math.random() * mapWidth),
-				Math.floor(Math.random() * mapHeight),
-				val
-			];
-			points.push(point);
-		}
-
 		// heatmap data format
 		let heat = simpleheat(heatMapCanvas);
 		// @ts-ignore
-		heat.data(points).max(max).draw();
+		heat.data(positionData).max(max).draw();
 
 		heatMapCanvas.style.backgroundImage = `url(${imageURL})`;
 		window.scrollTo(0, document.body.scrollHeight);
@@ -46,6 +34,7 @@
 
 <main>
 	<h3>Fathom said:</h3>
+	<p>{responseText}</p>
 	<canvas bind:this={heatMapCanvas} />
 </main>
 

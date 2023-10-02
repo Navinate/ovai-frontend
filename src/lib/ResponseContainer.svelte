@@ -78,11 +78,11 @@
 			case 'taxonomy':
 				handleTaxonomy(container, jsonResponse);
 				break;
-			case 'chart':
+			/* case 'chart':
 				handleChart(container);
-				break;
-			case 'vega':
-				handleVega(container);
+				break; */
+			case 'vegaLite':
+				handleVega(container, jsonResponse);
 				break;
 			default:
 				console.error('Error: Invalid output type');

@@ -1,25 +1,27 @@
 import { outputType } from '$lib/Helpers/enums';
+import type { VisualizationSpec } from 'vega-embed';
 
 export interface apiResponse {
 	outputType: string;
 	responseText: string;
-	species: speciesData[];
+	species?: speciesData[];
+	vegaSchema?: VisualizationSpec;
 	table?: any[];
 }
 
 export interface speciesData {
 	id: number;
-	concept: string;
-	name: string; //species name
-	url: string;
+	concept: string; //species name
+	name?: string;
+	url?: string;
 	taxonomy?: string[];
 	created_timestamp?: string;
 	depth_meters?: string;
 	imaging_type?: string;
 	last_updated_timestamp?: string;
 	last_validation?: string;
-	latitude?: string;
-	longitude?: string;
+	latitude?: number;
+	longitude?: number;
 	media_type?: string;
 	submitter?: string;
 	timestamp?: string;
