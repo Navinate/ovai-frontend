@@ -75,7 +75,7 @@
 			case 'heatmap':
 				handleHeatMap(container, jsonResponse);
 				break;
-			case 'taxonomy':
+			case 'species':
 				handleTaxonomy(container, jsonResponse);
 				break;
 			/* case 'chart':

@@ -1,23 +1,18 @@
 <script lang="ts">
-	import type { taxonomyTree } from '$lib/types/taxonomyTypes';
-	import { taxonomyLevel } from '$lib/Helpers/enums';
-
-	export let data: taxonomyTree[];
-	export let isRoot: boolean = false;
-	console.log(data);
+	export let responseText: string;
+	export let data: {name: string, rank: string}[];
+	data = data.reverse();
 </script>
 
 <main>
-	{#if isRoot}
 		<h3>Fathom said:</h3>
-		<hr />
-	{/if}
-	{#each data as tree}
-		<h2>{tree.name} : {taxonomyLevel[tree.level]}</h2>
-		{#if tree.children}
-			<svelte:self data={tree.children} />
-		{/if}
-	{/each}
+		<p>{responseText}</p>
+		<br/>
+	<ul>
+		{#each data as d, i}
+			<li style="padding-left: {i*10}px;">{d.name} : {d.rank}</li>
+		{/each}
+	</ul>
 </main>
 
 <style>
