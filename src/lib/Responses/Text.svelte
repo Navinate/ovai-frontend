@@ -4,6 +4,7 @@
 
 <main>
 	<h3>Fathom said:</h3>
+	<br/>
 	<p>{text}</p>
 </main>
 
