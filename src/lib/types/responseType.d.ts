@@ -14,12 +14,12 @@ export interface speciesData {
 	concept: string; //species name
 	name?: string;
 	url?: string;
-	taxonomy?: {
+	taxonomy: {
 		ancestors: {
 			name: string;
 			rank: string;	
 		}[]
-		descendents: {
+		descendants: {
 			name: string;
 			parent: string;
 			rank: string;

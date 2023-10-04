@@ -16,7 +16,7 @@ export default function handleHeatMap(target: HTMLElement, jsonResponse: apiResp
 			}
 			
 		}
-	} else if (jsonResponse.table !== undefined) {
+	} /* else if (jsonResponse.table !== undefined) {
 		let table = jsonResponse.table as {latitude: number, longitude: number}[];
 		for(let entry of table) {
 			positionData.push({
@@ -24,7 +24,7 @@ export default function handleHeatMap(target: HTMLElement, jsonResponse: apiResp
 				y: entry.longitude,
 			});
 		}
-	}
+	} */
 	return new HeatMap({ target: target, props: {
 		responseText: jsonResponse.responseText,
 		positionData: positionData,
