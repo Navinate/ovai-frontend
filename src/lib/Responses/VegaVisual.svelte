@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import vegaEmbed, { type VisualizationSpec } from 'vega-embed';
-	import type { Spec } from 'vega';
 
-	export let spec: VisualizationSpec | Spec;
+	export let spec: VisualizationSpec;
+	export let responseText: string;
 
 	let visual: HTMLDivElement;
 
@@ -14,6 +14,9 @@
 </script>
 
 <main>
+	<h3>Fathom said:</h3>
+	<br/>
+	<p>{responseText}</p>
 	<div bind:this={visual} />
 </main>
 

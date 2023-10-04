@@ -14,6 +14,10 @@
 	export let guid: string | null = null;
 
 	export async function fetchResponse(inputtedText: string) {
+
+		//repeat user input into a user input text box component
+		const userInput = new UserInput({ target: container, props: { text: inputtedText } });
+
 		// create paramter object for input
 		let params = new URLSearchParams();
 		params.append('question', inputtedText);
@@ -48,8 +52,8 @@
 	}
 
 	function handleResponse(jsonResponse: any, inputtedText: string) {
-		//repeat user input into a user input text box component
-		//const userInput = new UserInput({ target: container, props: { text: inputtedText } });
+		
+		
 		if(jsonResponse.outputType === undefined || jsonResponse.outputType === null) {
 			handleText(container, 'No Output Type specified');
 		} else {

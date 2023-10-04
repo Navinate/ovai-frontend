@@ -7,7 +7,8 @@ export default function handleVega(target: HTMLElement, jsonResponse: apiRespons
 	return new VegaVisual({
 		target: target,
         props: {
-            spec: jsonResponse.vegaSchema as VisualizationSpec
+            spec: jsonResponse.vegaSchema as VisualizationSpec,
+            responseText: jsonResponse.responseText
         }
 	});
 }
