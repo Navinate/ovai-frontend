@@ -6,7 +6,7 @@ export interface apiResponse {
 	responseText: string;
 	species?: speciesData[];
 	vegaSchema?: VisualizationSpec;
-	table?: any[];
+	table?: string;
 }
 
 export interface speciesData {
@@ -14,7 +14,17 @@ export interface speciesData {
 	concept: string; //species name
 	name?: string;
 	url?: string;
-	taxonomy?: string[];
+	taxonomy?: {
+		ancestors: {
+			name: string;
+			rank: string;	
+		}[]
+		descendents: {
+			name: string;
+			parent: string;
+			rank: string;
+		}[]
+	};
 	created_timestamp?: string;
 	depth_meters?: string;
 	imaging_type?: string;

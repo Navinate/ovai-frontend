@@ -7,6 +7,7 @@
 	import handleVega from '$lib/Handlers/VegaHandler';
 	import type { apiResponse } from './types/responseType';
 	import { createEventDispatcher } from 'svelte';
+	import { handleTable } from './Handlers/Tablehandler';
 	const dispatch = createEventDispatcher();
 
 	let container: HTMLElement;
@@ -17,6 +18,7 @@
 
 		//repeat user input into a user input text box component
 		const userInput = new UserInput({ target: container, props: { text: inputtedText } });
+		window.scrollTo(0, document.body.scrollHeight);
 
 		// create paramter object for input
 		let params = new URLSearchParams();
@@ -60,7 +62,7 @@
 			console.log("Output type: ",jsonResponse.outputType);
 			switch (jsonResponse.outputType) {
 				case 'text':
-					handleText(container, jsonResponse.textResponse);
+					handleText(container, jsonResponse.responseText);
 					break;
 				case 'image':
 					handleImage(container, jsonResponse);
@@ -78,6 +80,9 @@
 					break;
 				case 'vegaLite':
 					handleVega(container, jsonResponse);
+					break;
+				case 'table':
+					handleTable(container, jsonResponse);
 					break;
 				default:
 					console.error('[TREY] Error: Invalid output type');

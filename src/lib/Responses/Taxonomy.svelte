@@ -1,18 +1,20 @@
 <script lang="ts">
+	import type { speciesData } from "$lib/types/responseType";
+	import RecursiveTax from "./recursiveTax.svelte";
+
 	export let responseText: string;
-	export let data: {name: string, rank: string}[];
-	data = data.reverse();
+	export let speciesArray: speciesData[];
 </script>
 
 <main>
 		<h3>Fathom said:</h3>
 		<p>{responseText}</p>
-		<br/>
-	<ul>
-		{#each data as d, i}
-			<li style="padding-left: {i*10}px;">{d.name} : {d.rank}</li>
+		<br />
+		{#each speciesArray as s}
+			<h3>{s.concept}</h3>
+			
+			<RecursiveTax taxonomy={s.taxonomy}/>
 		{/each}
-	</ul>
 </main>
 
 <style>
