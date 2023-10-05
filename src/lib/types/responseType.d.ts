@@ -6,7 +6,11 @@ export interface apiResponse {
 	responseText: string;
 	species?: speciesData[];
 	vegaSchema?: VisualizationSpec;
-	table?: string;
+	table?: string | {
+		latitude: number;
+		longitude: number;
+		count: number;
+	}[];
 }
 
 export interface speciesData {

@@ -24,17 +24,18 @@
 
 		console.log("Center: ", middleX, middleY);
 
-		let mapWidth = heatMapCanvas.width;
-		let mapHeight = Math.ceil(((maxX - minX) / (maxY - minY)) * mapWidth);
-		heatMapCanvas.height = mapHeight;
+		//let mapWidth = heatMapCanvas.width;
+		//let mapHeight = Math.ceil(((maxX - minX) / (maxY - minY)) * 600);
+		//heatMapCanvas.height = mapHeight;
 
-		let imageURL = `https://api.mapbox.com/styles/v1/mapbox/satellite-v9/static/${middleY},${middleX},8.9,0/${mapWidth}x${mapHeight}?access_token=${mapBoxKey}`;
+		let imageURL = `https://api.mapbox.com/styles/v1/mapbox/satellite-v9/static/[${minY},${minX},${maxY},${maxX}]/${700}x${500}?access_token=${mapBoxKey}`;
+		//let imageURL = `https://api.mapbox.com/styles/v1/mapbox/satellite-v9/static/${middleY},${middleX},10,0/600x400?access_token=${mapBoxKey}`;
 
 		let arrayOfArrays: [number,number,number][];
-		
+
 		arrayOfArrays = positionData.map((obj) => [
-			remap(obj.x, minX, maxX, 0, mapWidth),
-			remap(obj.y, minY, maxY, 0, mapHeight),
+			remap(obj.x, minX, maxX, 0, 500), //WEIRD SHIFTING, FIX LATER
+			remap(obj.y, minY, maxY, 0, 300), //WEIRD SHIFTING, FIX LATER
 			obj.z
 		]);
 		
@@ -74,8 +75,8 @@
 
 	canvas {
 		border-radius: 0.25rem;
-		width: 100%;
-		height: 100%;
+		width: 700px;
+		height: 500px;
 		background-repeat: no-repeat;
 		background-position: center;
 		background-size: cover;

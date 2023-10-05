@@ -18,7 +18,7 @@ export default function handleHeatMap(target: HTMLElement, jsonResponse: apiResp
 			
 		}
 	} else if (jsonResponse.table !== undefined) {
-		let table = JSON.parse(jsonResponse.table) as {latitude: number, longitude: number, count: number}[];
+		let table = jsonResponse.table as {latitude: number, longitude: number, count: number}[];
 		for(let entry of table) {
 			positionData.push({
 				x: entry.latitude,
@@ -27,7 +27,7 @@ export default function handleHeatMap(target: HTMLElement, jsonResponse: apiResp
 			});
 		}
 	}
-	
+
 	return new HeatMap({ target: target, props: {
 		responseText: jsonResponse.responseText,
 		positionData: positionData,
