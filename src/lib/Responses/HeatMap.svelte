@@ -14,10 +14,10 @@
 		// heatmap data format
 		let heat = simpleheat(heatMapCanvas);
 
-		let maxX = Math.max(...positionData.map((obj) => obj.x));
-		let minX = Math.min(...positionData.map((obj) => obj.x));
-		let maxY = Math.max(...positionData.map((obj) => obj.y));
-		let minY = Math.min(...positionData.map((obj) => obj.y));
+		let maxX = Math.max(...positionData.map((obj) => obj.x)) + 0.1;
+		let minX = Math.min(...positionData.map((obj) => obj.x)) - 0.1;
+		let maxY = Math.max(...positionData.map((obj) => obj.y)) + 0.1;
+		let minY = Math.min(...positionData.map((obj) => obj.y)) - 0.1;
 
 		let middleX = maxX - (maxX - minX) / 2;
 		let middleY = maxY - (maxY - minY) / 2;
@@ -34,8 +34,8 @@
 		let arrayOfArrays: [number,number,number][];
 
 		arrayOfArrays = positionData.map((obj) => [
-			remap(obj.x, minX, maxX, 0, 600), //WEIRD SHIFTING, FIX LATER
-			remap(obj.y, minY, maxY, 0, 400), //WEIRD SHIFTING, FIX LATER
+			remap(obj.x, minX, maxX, 0, 700), //WEIRD SHIFTING, FIX LATER
+			remap(obj.y, minY, maxY, 0, 500), //WEIRD SHIFTING, FIX LATER
 			obj.z
 		]);
 		
