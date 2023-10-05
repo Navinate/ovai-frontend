@@ -6,7 +6,7 @@
 		'pk.eyJ1IjoidGNsdWZmIiwiYSI6ImNsbWpoNGJ3MTAzYm8ycXJ4ZDVieTk3ODYifQ.__pspVfdjrgiM_ACd5jhdg';
 
 	export let responseText: string;
-	export let positionData: { x: number; y: number }[];
+	export let positionData: {x: number; y: number; z: number}[];
 
 	let heatMapCanvas: HTMLCanvasElement;
 	// minimal heatmap instance configuration
@@ -22,23 +22,25 @@
 		let middleX = maxX - (maxX - minX) / 2;
 		let middleY = maxY - (maxY - minY) / 2;
 
-		console.log(maxX, maxY, minX, minY);
+		console.log("Center: ", middleX, middleY);
 
 		let mapWidth = heatMapCanvas.width;
-		let mapHeight = ((maxX - minX) / (maxY - minY)) * mapWidth;
+		let mapHeight = Math.ceil(((maxX - minX) / (maxY - minY)) * mapWidth);
 		heatMapCanvas.height = mapHeight;
 
-		let imageURL = `https://api.mapbox.com/styles/v1/mapbox/satellite-v9/static/${middleY},${Math.floor(
-			middleX
-		)},8.9,0/${mapWidth}x${mapHeight}?access_token=${mapBoxKey}`;
+		let imageURL = `https://api.mapbox.com/styles/v1/mapbox/satellite-v9/static/${middleY},${middleX},8.9,0/${mapWidth}x${mapHeight}?access_token=${mapBoxKey}`;
 
-		const arrayOfArrays = positionData.map((obj) => [
+		let arrayOfArrays: [number,number,number][];
+		
+		arrayOfArrays = positionData.map((obj) => [
 			remap(obj.x, minX, maxX, 0, mapWidth),
-			remap(obj.y, minY, maxY, 0, mapHeight)
+			remap(obj.y, minY, maxY, 0, mapHeight),
+			obj.z
 		]);
+		
+		
 
 		console.table(positionData);
-		//@ts-ignore
 		heat.data(arrayOfArrays).draw();
 
 		heatMapCanvas.style.backgroundImage = `url(${imageURL})`;
