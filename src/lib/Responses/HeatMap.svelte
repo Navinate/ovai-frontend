@@ -34,15 +34,20 @@
 		let arrayOfArrays: [number,number,number][];
 
 		arrayOfArrays = positionData.map((obj) => [
-			remap(obj.x, minX, maxX, 0, 500), //WEIRD SHIFTING, FIX LATER
-			remap(obj.y, minY, maxY, 0, 300), //WEIRD SHIFTING, FIX LATER
+			remap(obj.x, minX, maxX, 0, 600), //WEIRD SHIFTING, FIX LATER
+			remap(obj.y, minY, maxY, 0, 400), //WEIRD SHIFTING, FIX LATER
 			obj.z
 		]);
 		
 		
 
 		console.table(positionData);
-		heat.data(arrayOfArrays).draw();
+
+		heat.radius(10,5);
+		heat.resize();
+
+		heat.data(arrayOfArrays);
+		heat.draw();
 
 		heatMapCanvas.style.backgroundImage = `url(${imageURL})`;
 
