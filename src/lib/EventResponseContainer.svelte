@@ -24,7 +24,9 @@
 			request += `&guid=${guid}`
 		}
 		const eventSource = new EventSource(request);
-
+		eventSource.addEventListener('message', (event: MessageEvent) => {
+    		console.log('Received message:', event.data);
+		});
 		//handleResponse(jsonResponse.response, inputtedText);
 			
 	}
