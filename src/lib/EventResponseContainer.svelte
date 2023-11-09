@@ -43,22 +43,22 @@
 					handleText(container, eventData.responseText);
 					break;
 				case 'image':
-					handleImage(container, eventData);
+					handleImage(container, eventData.result);
 					break;
 				case 'histogram':
 					console.log('histogram request');
 				case 'heatmap':
-					handleHeatMap(container, eventData);
+					handleHeatMap(container, eventData.result);
 					break;
 				case 'species':
 					console.log(eventData.responseText);
 					handleTaxonomy(container, eventData.result.responseText);
 					break;
 				case 'vegaLite':
-					handleVega(container, eventData);
+					handleVega(container, eventData.result);
 					break;
 				case 'table':
-					handleTable(container, eventData);
+					handleTable(container, eventData.result);
 					break;
 				default:
 					console.error('[TREY] Error: Invalid output type');
