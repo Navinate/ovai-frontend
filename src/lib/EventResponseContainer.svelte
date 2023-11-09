@@ -10,6 +10,7 @@
 	const dispatch = createEventDispatcher();
 
 	let container: HTMLElement;
+	let updateBox: Text;
 	export let URL: string;
 	export let guid: string | null = null;
 
@@ -25,18 +26,30 @@
 		}
 		const eventSource = new EventSource(request);
 		eventSource.addEventListener('message', (event: MessageEvent) => {
-    		console.log('Received message:', event.data);
-			handleResponse(JSON.parse(event.data));
+    		
+			let parsedData = JSON.parse(event.data);
+			console.log('Received message:', parsedData);
+			handleResponse(parsedData);
+			if(parsedData.result != undefined) {
+				console.log("Event Stream Closed");
+				eventSource.close();
+				dispatch( 'responseReceived');
+			}
 		});
 		
 			
 	}
 
 	function handleResponse(eventData: any) {
+		
 		if(eventData.message != undefined || eventData.message != null) {
-			handleText(container, eventData.message);
+			if(updateBox != null) {
+				updateBox.$destroy();
+			}
+			updateBox = handleText(container, eventData.message);
 		}
 		if(eventData.result != undefined) {
+			updateBox.$destroy();
 			console.log("Output type: ",eventData.result.outputType);
 			switch (eventData.result.outputType) {
 				case 'text':
@@ -68,7 +81,6 @@
 		}
 		//scroll to bottom of the page
 		window.scrollTo(0, document.body.scrollHeight);
-		dispatch( 'responseReceived');
 	}
 </script>
 
