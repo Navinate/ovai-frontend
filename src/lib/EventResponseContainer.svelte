@@ -26,41 +26,39 @@
 		const eventSource = new EventSource(request);
 		eventSource.addEventListener('message', (event: MessageEvent) => {
     		console.log('Received message:', event.data);
+			handleResponse(JSON.parse(event.data));
 		});
-		//handleResponse(jsonResponse.response, inputtedText);
+		
 			
 	}
 
-	function handleResponse(jsonResponse: any, inputtedText: string) {
-		
-		
-		if(jsonResponse.outputType === undefined || jsonResponse.outputType === null) {
-			handleText(container, 'No Output Type specified');
-		} else {
-			console.log("Output type: ",jsonResponse.outputType);
-			switch (jsonResponse.outputType) {
+	function handleResponse(eventData: any) {
+		if(eventData.message != undefined || eventData.message != null) {
+			handleText(container, eventData.message);
+		}
+		if(eventData.result != undefined) {
+			console.log("Output type: ",eventData.result.outputType);
+			switch (eventData.result.outputType) {
 				case 'text':
-					handleText(container, jsonResponse.responseText);
+					handleText(container, eventData.responseText);
 					break;
 				case 'image':
-					handleImage(container, jsonResponse);
+					handleImage(container, eventData);
 					break;
 				case 'histogram':
 					console.log('histogram request');
 				case 'heatmap':
-					handleHeatMap(container, jsonResponse);
+					handleHeatMap(container, eventData);
 					break;
 				case 'species':
-					handleTaxonomy(container, jsonResponse);
-					break;
-				case 'species':
-					handleTaxonomy(container, jsonResponse);
+					console.log(eventData.responseText);
+					handleTaxonomy(container, eventData.result.responseText);
 					break;
 				case 'vegaLite':
-					handleVega(container, jsonResponse);
+					handleVega(container, eventData);
 					break;
 				case 'table':
-					handleTable(container, jsonResponse);
+					handleTable(container, eventData);
 					break;
 				default:
 					console.error('[TREY] Error: Invalid output type');

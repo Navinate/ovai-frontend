@@ -1,10 +1,11 @@
 <script lang="ts">
 	import Prompt from '$lib/Prompt.svelte';
-	import ResponseContainer from '$lib/ResponseContainer.svelte';
+	import EventResponseContainer from '$lib/EventResponseContainer.svelte';
 
-	const URL = 'http://localhost:3000';
+	const URL = 'http://128.46.81.243:8000/event-stream';
+	
 
-	let container: ResponseContainer;
+	let container: EventResponseContainer;
 	let promptBox: Prompt;
 
 	function handleResponse(event: any) {
