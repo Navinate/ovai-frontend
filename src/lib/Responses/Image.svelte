@@ -1,7 +1,8 @@
 <script lang="ts">
 	import type { speciesData } from '$lib/types/responseType';
 
-	export let speciesData: speciesData[];
+	//export let speciesData: speciesData[];
+	export let imageArray: string[];
 	export let naturalTextResponse: string;
 </script>
 
@@ -9,10 +10,10 @@
 	<h3>Fathom said:</h3>
 	<blockquote>{naturalTextResponse}</blockquote>
 	<div>
-		{#each speciesData as entry}
+		{#each imageArray as entry}
 			<div>
-				<img src={entry.url} alt={entry.name} />
-				<h4>Name: {entry.concept}</h4>
+				<img src={entry} alt="image retrieved from fathomnet"/>
+				<!-- <h4>Name: {entry.concept}</h4> -->
 			</div>
 		{/each}
 	</div>
