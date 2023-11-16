@@ -65,7 +65,7 @@
 					break;
 				case 'species':
 					console.log(eventData.responseText);
-					handleTaxonomy(container, eventData.result.responseText);
+					handleTaxonomy(container, eventData.result);
 					break;
 				case 'vegaLite':
 					handleVega(container, eventData.result);

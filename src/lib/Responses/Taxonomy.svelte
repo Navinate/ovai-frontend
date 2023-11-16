@@ -2,18 +2,18 @@
 	import type { speciesData } from "$lib/types/responseType";
 
 	export let responseText: string;
-	export let speciesArray: speciesData[];
+	export let speciesArray: any[];
 
 	let indent = 20;
 	let descPadding = 0;
-	let lastRank = speciesArray[0].taxonomy.descendants[0].rank;
+	//let lastRank = speciesArray[0].taxonomy.descendants[0].rank;
 </script>
 
 <main>
 		<h3>Fathom said:</h3>
 		<p>{responseText}</p>
 		<br />
-		{#each speciesArray as s}
+		<!-- {#each speciesArray as s}
 			<h3>{s.concept}</h3>
 			<ul>
 				{#each s.taxonomy.ancestors as a, i}
@@ -24,7 +24,7 @@
 					<li style="padding-left: {d.rank !== lastRank ? descPadding +=indent : descPadding}px;">{d.name} : {d.rank}</li>
 				{/each}
 			</ul>
-		{/each}
+		{/each} -->
 </main>
 
 <style>

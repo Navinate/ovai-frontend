@@ -13,7 +13,6 @@
 			<div>
 				<img src={entry.url} alt={entry.name} />
 				<h4>Name: {entry.concept}</h4>
-				<p>Depth: {entry.depth_meters}</p>
 			</div>
 		{/each}
 	</div>
