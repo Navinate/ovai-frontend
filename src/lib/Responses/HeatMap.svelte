@@ -13,37 +13,40 @@
 	onMount(() => {
 		// heatmap data format
 		let heat = simpleheat(heatMapCanvas);
+		// the +- 0.1 is to add margins between the map edge and data
+		let maxLat = Math.max(...positionData.map((obj) => obj.x)) + 0.1;
+		let minLat = Math.min(...positionData.map((obj) => obj.x)) - 0.1;
+		let maxLong = Math.max(...positionData.map((obj) => obj.y)) + 0.1;
+		let minLong = Math.min(...positionData.map((obj) => obj.y)) - 0.1;
+		console.log("Max X, Min X, Max Y, Min Y");
+		console.log(maxLong, minLong, maxLat, minLat);
 
-		let maxX = Math.max(...positionData.map((obj) => obj.x)) + 0.1;
-		let minX = Math.min(...positionData.map((obj) => obj.x)) - 0.1;
-		let maxY = Math.max(...positionData.map((obj) => obj.y)) + 0.1;
-		let minY = Math.min(...positionData.map((obj) => obj.y)) - 0.1;
 
-		let middleX = maxX - (maxX - minX) / 2;
-		let middleY = maxY - (maxY - minY) / 2;
+		let ratio = (maxLat - minLat) / (maxLong - minLong);
+		let xScale = 880
+		let yScale = Math.ceil(xScale * ratio);
 
-		console.log("Center: ", middleX, middleY);
+		let mapWidth = xScale;
+		heatMapCanvas.width = mapWidth;
+		let mapHeight = yScale;
+		heatMapCanvas.height = mapHeight;
 
-		//let mapWidth = heatMapCanvas.width;
-		//let mapHeight = Math.ceil(((maxX - minX) / (maxY - minY)) * 600);
-		//heatMapCanvas.height = mapHeight;
-
-		let imageURL = `https://api.mapbox.com/styles/v1/mapbox/satellite-v9/static/[${minY},${minX},${maxY},${maxX}]/${700}x${500}?access_token=${mapBoxKey}`;
-		//let imageURL = `https://api.mapbox.com/styles/v1/mapbox/satellite-v9/static/${middleY},${middleX},10,0/600x400?access_token=${mapBoxKey}`;
+		let imageURL = `https://api.mapbox.com/styles/v1/mapbox/satellite-v9/static/[${minLong},${minLat},${maxLong},${maxLat}]/${xScale}x${yScale}?access_token=${mapBoxKey}`;
 
 		let arrayOfArrays: [number,number,number][];
 
 		arrayOfArrays = positionData.map((obj) => [
-			remap(obj.x, minX, maxX, 0, 700), //WEIRD SHIFTING, FIX LATER
-			remap(obj.y, minY, maxY, 0, 500), //WEIRD SHIFTING, FIX LATER
+			remap(obj.x, minLat, maxLat, 0, xScale), //WEIRD SHIFTING, FIX LATER
+			remap(obj.y, minLong, maxLong, 0, yScale), //WEIRD SHIFTING, FIX LATER
 			obj.z
 		]);
 		
 		
 
-		console.table(positionData);
+		//console.table(positionData);
 
-		heat.radius(10,5);
+		// radius, blur amount
+		heat.radius(2,5);
 		heat.resize();
 
 		heat.data(arrayOfArrays);
@@ -63,7 +66,9 @@
 	<h3>Fathom said:</h3>
 	<p>{responseText}</p>
 	<br />
+	<p class="dev-note">Developer Note: background map image is NOT perfectly lined up with the plotted data YET</p>
 	<canvas bind:this={heatMapCanvas} />
+	
 </main>
 
 <style>
@@ -80,10 +85,12 @@
 
 	canvas {
 		border-radius: 0.25rem;
-		width: 700px;
-		height: 500px;
 		background-repeat: no-repeat;
 		background-position: center;
 		background-size: cover;
+	}
+	.dev-note {
+		font-style: italic;
+		color: red;
 	}
 </style>
