@@ -49,11 +49,13 @@
 			updateBox = handleText(container, eventData.message);
 		}
 		if(eventData.result != undefined) {
+			console.log(eventData.result)
+			guid = eventData.result.guid
 			updateBox.$destroy();
 			console.log("Output type: ",eventData.result.outputType);
 			switch (eventData.result.outputType) {
 				case 'text':
-					handleText(container, eventData.responseText);
+					handleText(container, eventData.result.responseText);
 					break;
 				case 'image':
 					handleImage(container, eventData.result);
