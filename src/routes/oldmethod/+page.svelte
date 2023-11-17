@@ -1,11 +1,10 @@
 <script lang="ts">
 	import Prompt from '$lib/Prompt.svelte';
-	import EventResponseContainer from '$lib/EventResponseContainer.svelte';
+	import ResponseContainer from '$lib/ResponseContainer.svelte';
 
-	const URL = 'http://128.46.81.243:8000/event-stream';
-	
+	const URL = 'http://128.46.81.243:8000/get_response';
 
-	let container: EventResponseContainer;
+	let container: ResponseContainer;
 	let promptBox: Prompt;
 
 	function handleResponse(event: any) {
@@ -20,7 +19,7 @@
 </script>
 
 <main>
-	<EventResponseContainer {URL} bind:this={container} on:responseReceived={responseReceived} />
+	<ResponseContainer {URL} bind:this={container} on:responseReceived={responseReceived} />
 	<Prompt bind:this={promptBox} on:submit={handleResponse} />
 </main>
 
