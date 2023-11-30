@@ -51,7 +51,7 @@
         top: 5rem;
         left: 0;
         z-index: 1000;
-        width: 30rem;
+        width: 25rem;
         height: 70%;
         background-color: rgba(0, 0, 0, 0.2);
         margin: 1rem;

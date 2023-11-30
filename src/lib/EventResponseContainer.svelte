@@ -82,7 +82,7 @@
 			}
 		}
 		//scroll to bottom of the page
-		window.scrollTo(0, document.body.scrollHeight);
+		//window.scrollTo(0, document.body.scrollHeight);
 	}
 </script>
 

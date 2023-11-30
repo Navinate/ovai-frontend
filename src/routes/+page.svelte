@@ -36,6 +36,7 @@
 <style>
 	main {
 		margin: 0 auto;
+		padding-left: 20rem;
 		max-width: 70vw;
 		height: 100dvh;
 		overscroll-behavior: none;
