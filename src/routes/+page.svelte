@@ -1,6 +1,14 @@
+<svelte:head>
+	<title>Ovai GPT</title>
+	<meta name="description" content="OVAI GPT Prototype" />
+</svelte:head>
+
 <script lang="ts">
+	import Info from '$lib/Info.svelte';
 	import Prompt from '$lib/Prompt.svelte';
 	import EventResponseContainer from '$lib/EventResponseContainer.svelte';
+
+	
 
 	const URL = 'http://128.46.81.243:8000/event-stream';
 	
@@ -20,13 +28,15 @@
 </script>
 
 <main>
-	<EventResponseContainer {URL} bind:this={container} on:responseReceived={responseReceived} />
-	<Prompt bind:this={promptBox} on:submit={handleResponse} />
+	<Info on:submit={handleResponse}></Info>
+		<EventResponseContainer {URL} bind:this={container} on:responseReceived={responseReceived} />
+		<Prompt bind:this={promptBox} on:submit={handleResponse} />
 </main>
 
 <style>
 	main {
-		width: 99vw;
+		margin: 0 auto;
+		max-width: 70vw;
 		height: 100dvh;
 		overscroll-behavior: none;
 	}
