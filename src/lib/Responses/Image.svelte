@@ -12,6 +12,7 @@
 	<div>
 		{#each imageArray as entry}
 			<div>
+				<!-- svelte-ignore a11y-img-redundant-alt -->
 				<img src={entry} alt="image retrieved from fathomnet"/>
 				<!-- <h4>Name: {entry.concept}</h4> -->
 			</div>
